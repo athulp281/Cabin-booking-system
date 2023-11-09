@@ -48,12 +48,11 @@ export default function BookingForm() {
         dispatch(addBooking(data)).then((res) => {
             console.log("res------", res);
 
-            if (res.payload.success) {
+            if (res.payload.message) {
                 enqueueSnackbar(res.payload.message, {
                     variant: "success",
                 });
             } else if (res.payload.error) {
-                alert(`${res.payload.error}`);
                 enqueueSnackbar(res.payload.error, {
                     variant: "error",
                 });

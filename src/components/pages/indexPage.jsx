@@ -2,20 +2,18 @@ import { Box, Button, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import ViewBookings from "./ViewBookings";
 import BookingForm from "./BookingForm";
-import LogInPage from "./LoginPage";
-import LoginPage from "./LoginPage";
+import LogInPage from "./LogInpage";
+import { useSnackbar } from "notistack";
+import { Login } from "./Login";
 
 export default function IndexPage() {
+    const { enqueueSnackbar } = useSnackbar();
     const [data, setData] = React.useState("ViewBooking");
     const [authData, setAuthData] = React.useState("");
-    const [authDataCheck, setAuthDataCheck] = React.useState("");
-
-    useEffect(() => {
-        setAuthDataCheck({
-            name: "Athul",
-            password: "12345",
-        });
-    }, []);
+    const [authDataCheck, setAuthDataCheck] = React.useState({
+        name: "Athul",
+        password: "12345",
+    });
 
     console.log("authData", authData);
     return (
@@ -75,7 +73,14 @@ export default function IndexPage() {
                     )}
                 </>
             ) : (
-                <LoginPage setAuthData={setAuthData} />
+                // <LogInPage
+                //     setAuthData={setAuthData}
+                //     authDataCheck={authDataCheck}
+                // />
+                <Login
+                    setAuthData={setAuthData}
+                    authDataCheck={authDataCheck}
+                />
             )}
         </div>
     );
