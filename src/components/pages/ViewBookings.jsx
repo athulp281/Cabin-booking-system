@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { getBookeddata } from "../../Redux/features/cabinBookingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { StatusCheck } from "./StatusCheck";
+import { Bookings } from "./Bookings";
 
 export default function ViewBookings() {
     const { data } = useSelector((state) => state.cabin);
@@ -77,9 +78,9 @@ export default function ViewBookings() {
             }}
         >
             <>
-                <Box padding={5}>
-                    <Paper elevation={3}>
-                        <DataGrid
+                <Box padding={1}>
+                    {/* <Paper elevation={3}> */}
+                    {/* <DataGrid
                             // loading={loading}
                             rows={data}
                             columns={HEAD}
@@ -91,8 +92,9 @@ export default function ViewBookings() {
                             rowsPerPageOptions={[5, 10, 25, 50]}
                             autoHeight
                         />
-                    </Paper>
+                    </Paper> */}
                 </Box>
+                <Bookings />
             </>
         </motion.div>
     );

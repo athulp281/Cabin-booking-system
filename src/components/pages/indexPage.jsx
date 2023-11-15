@@ -22,7 +22,7 @@ export default function IndexPage() {
             authData.password === authDataCheck.password ? (
                 <>
                     <Box>
-                        <Box sx={{ padding: 5 }}>
+                        <Box sx={{ padding: 3 }}>
                             <img
                                 height={50}
                                 width={200}
@@ -33,6 +33,7 @@ export default function IndexPage() {
                             <Stack direction={"row"} spacing={2}>
                                 <Box>
                                     <Button
+                                        sx={{ borderRadius: 5 }}
                                         variant={
                                             data == "BookingForm"
                                                 ? "contained"
@@ -47,6 +48,7 @@ export default function IndexPage() {
                                 </Box>
                                 <Box>
                                     <Button
+                                        sx={{ borderRadius: 5 }}
                                         variant={
                                             data == "ViewBooking"
                                                 ? "contained"

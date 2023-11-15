@@ -23,6 +23,7 @@ export default function BookingForm() {
     const [value, setValue] = React.useState(null);
     const [fromTime, setFromTime] = React.useState(null);
     const [toTime, setToTime] = React.useState(null);
+    const { loading } = useSelector((state) => state.cabin);
     const [data, setData] = React.useState({
         department: "",
         bookingPerson: "",
@@ -44,20 +45,35 @@ export default function BookingForm() {
         setData(updatedData);
     };
 
-    const handleSubmit = () => {
-        dispatch(addBooking(data)).then((res) => {
-            console.log("res------", res);
-
-            if (res.payload.message) {
-                enqueueSnackbar(res.payload.message, {
-                    variant: "success",
-                });
-            } else if (res.payload.error) {
-                enqueueSnackbar(res.payload.error, {
-                    variant: "error",
-                });
+    function areObjectValuesNotEmpty(obj) {
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key) && obj[key] === "") {
+                return false;
             }
-        });
+        }
+        return true;
+    }
+    const handleSubmit = () => {
+        if (areObjectValuesNotEmpty(data)) {
+            dispatch(addBooking(data)).then((res) => {
+                console.log("res------", res);
+
+                if (res.payload.message) {
+                    enqueueSnackbar(res.payload.message, {
+                        variant: "success",
+                    });
+                } else if (res.payload.error) {
+                    enqueueSnackbar(res.payload.error, {
+                        variant: "error",
+                    });
+                }
+            });
+        } else {
+            enqueueSnackbar("Please fill all the fileds...!", {
+                variant: "warning",
+            });
+            console.log("Some values are empty.");
+        }
     };
     return (
         <motion.div
@@ -96,6 +112,7 @@ export default function BookingForm() {
                                         Department
                                     </InputLabel>
                                     <Select
+                                        required
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         // value={data.bookingPerson}
@@ -146,6 +163,7 @@ export default function BookingForm() {
                                         Cabin
                                     </InputLabel>
                                     <Select
+                                        required
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={data.cabin}
@@ -254,10 +272,12 @@ export default function BookingForm() {
                                 <Stack direction={"row"} spacing={2}>
                                     <Button variant="outlined">Clear</Button>
                                     <Button
+                                        // type="submit"
                                         variant="contained"
                                         onClick={handleSubmit}
                                     >
-                                        Save
+                                        {loading ? "Saving...." : "Save"}
+                                        {/* Save */}
                                     </Button>
                                 </Stack>
                             </Box>
