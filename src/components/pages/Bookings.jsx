@@ -14,13 +14,12 @@ import useResponsive from "../../hooks/UseResponsive";
 
 export const Bookings = () => {
     const smUp = useResponsive("up", "sm");
-
     const mdUp = useResponsive("up", "md");
     const [value, setValue] = React.useState(dayjs());
     const [filteredData, setFilteredData] = React.useState();
 
     const dispatch = useDispatch();
-    console.log("filteredData", filteredData);
+
     const { data } = useSelector((state) => state.cabin);
 
     useEffect(() => {

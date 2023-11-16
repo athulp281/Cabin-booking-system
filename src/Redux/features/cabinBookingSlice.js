@@ -47,7 +47,7 @@ const bookCabinSlice = createSlice({
         });
         builder.addCase(getBookeddata.fulfilled, (state, action) => {
             const data = formatDataForDataTable(
-                action.payload.allBookingDetails
+                action.payload.allBokkingDetails
             );
 
             return {
