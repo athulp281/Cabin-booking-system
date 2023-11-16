@@ -25,6 +25,9 @@ export const Bookings = () => {
     useEffect(() => {
         dispatch(getBookeddata());
     }, []);
+    useEffect(() => {
+        setValue(dayjs());
+    }, [data]);
 
     useEffect(() => {
         const date = value.format("DD/MM/YYYY");

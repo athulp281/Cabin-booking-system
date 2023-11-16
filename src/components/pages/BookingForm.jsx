@@ -32,6 +32,7 @@ export default function BookingForm() {
         department: "",
         bookingPerson: "",
         startTime: "",
+        description: "",
         cabin: "",
         endTime: "",
         date: "",
@@ -63,6 +64,8 @@ export default function BookingForm() {
                 console.log("res------", res);
 
                 if (res.payload.message) {
+                    // setDatas("ViewBooking");
+
                     enqueueSnackbar(res.payload.message, {
                         variant: "success",
                     });
@@ -90,8 +93,8 @@ export default function BookingForm() {
             }}
         >
             <form>
-                <Box sx={{ padding: 4 }}>
-                    <Paper elevation={3} sx={{ padding: 4 }}>
+                <Box sx={{ padding: smUp ? 4 : 1 }}>
+                    <Paper elevation={3} sx={{ padding: 4, borderRadius: 2 }}>
                         <Stack direction={"column"} spacing={2}>
                             <Box>
                                 <TextField
@@ -218,6 +221,23 @@ export default function BookingForm() {
                                     )}
                                 />
                             </LocalizationProvider>
+                            <Box>
+                                <TextField
+                                    label="Purpuse"
+                                    placeholder="Enter Your purpuse"
+                                    fullWidth
+                                    variant="outlined"
+                                    required
+                                    value={data.description}
+                                    onChange={(event) => {
+                                        const updatedData = {
+                                            ...data,
+                                            description: event.target.value,
+                                        };
+                                        setData(updatedData);
+                                    }}
+                                />
+                            </Box>
                             <Stack
                                 direction={smUp ? "row" : "column"}
                                 spacing={2}

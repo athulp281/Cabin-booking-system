@@ -32,18 +32,24 @@ export default function LoginPage({ setAuthData, authDataCheck }) {
     const handleLogin = (event) => {
         event.preventDefault();
         setAuthData(data);
-        if (
-            data.name === authDataCheck.name &&
-            data.password === authDataCheck.password
-        ) {
-            const myObject = data;
-            localStorage.setItem("authData", JSON.stringify(myObject));
-            enqueueSnackbar("LogIn Successfully....", {
-                variant: "success",
-            });
-        } else if (data.name != "" && data.password != "") {
-            enqueueSnackbar("Invalid credentials...!", {
-                variant: "error",
+        if (data.name != "" && data.password != "") {
+            if (
+                data.name === authDataCheck.name &&
+                data.password === authDataCheck.password
+            ) {
+                const myObject = data;
+                localStorage.setItem("authData", JSON.stringify(myObject));
+                enqueueSnackbar("LogIn Successfully....", {
+                    variant: "success",
+                });
+            } else if (data.name != "" && data.password != "") {
+                enqueueSnackbar("Invalid credentials...!", {
+                    variant: "error",
+                });
+            }
+        } else {
+            enqueueSnackbar("Please fill all the fiels...!", {
+                variant: "warning",
             });
         }
     };
@@ -54,7 +60,7 @@ export default function LoginPage({ setAuthData, authDataCheck }) {
                     elevation={0}
                     sx={{
                         borderRadius: 5,
-                        padding: 8,
+                        padding: smUp ? 8 : 5,
                         width: "100%",
                     }}
                 >
@@ -87,8 +93,8 @@ export default function LoginPage({ setAuthData, authDataCheck }) {
                         <Box marginTop={4}>
                             <Stack direction={"column"} spacing={2}>
                                 <TextField
-                                    label="name"
-                                    placeholder="Enter your name "
+                                    label="Name"
+                                    placeholder="Enter your Name "
                                     fullWidth
                                     required
                                     value={data.name}

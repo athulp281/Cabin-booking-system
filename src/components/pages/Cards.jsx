@@ -119,7 +119,7 @@ export const Cards = ({ data }) => {
                                 variant="body2"
                                 color="text.secondary"
                             >
-                                {data.discription}
+                                {data.description}
                             </Typography>
                         </CardContent>
                         <CardActions>
