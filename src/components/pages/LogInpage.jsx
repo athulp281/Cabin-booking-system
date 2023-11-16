@@ -8,8 +8,12 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useSnackbar } from "notistack";
+import useResponsive from "../../hooks/UseResponsive";
 
 export default function LoginPage({ setAuthData, authDataCheck }) {
+    const smUp = useResponsive("up", "sm");
+
+    const mdUp = useResponsive("up", "md");
     const { enqueueSnackbar } = useSnackbar();
     const [data, setData] = React.useState({
         name: "",
@@ -32,6 +36,8 @@ export default function LoginPage({ setAuthData, authDataCheck }) {
             data.name === authDataCheck.name &&
             data.password === authDataCheck.password
         ) {
+            const myObject = data;
+            localStorage.setItem("authData", JSON.stringify(myObject));
             enqueueSnackbar("LogIn Successfully....", {
                 variant: "success",
             });
@@ -43,10 +49,14 @@ export default function LoginPage({ setAuthData, authDataCheck }) {
     };
     return (
         <div>
-            <Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Paper
                     elevation={0}
-                    sx={{ borderRadius: 5, padding: 7, width: "100%" }}
+                    sx={{
+                        borderRadius: 5,
+                        padding: 8,
+                        width: "100%",
+                    }}
                 >
                     <Box sx={{ display: "flex" }}>
                         <Typography

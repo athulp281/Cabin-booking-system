@@ -15,8 +15,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addBooking } from "../../Redux/features/cabinBookingSlice";
 import { useSnackbar } from "notistack";
+import useResponsive from "../../hooks/UseResponsive";
 
 export default function BookingForm() {
+    const smUp = useResponsive("up", "sm");
+
+    const mdUp = useResponsive("up", "md");
     const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch();
     // const [open, setOpen] = React.useState(false);
@@ -170,14 +174,26 @@ export default function BookingForm() {
                                         label="Cabin"
                                         onChange={handleChangeCabin}
                                     >
-                                        <MenuItem value={"GROUND FLOOR"}>
-                                            GROUND FLOOR
+                                        <MenuItem value={" BARCELONA"}>
+                                            BARCELONA
                                         </MenuItem>
-                                        <MenuItem value={"FIRST FLOOR"}>
-                                            FIRST FLOOR
+                                        <MenuItem value={" HELSINKI"}>
+                                            HELSINKI
                                         </MenuItem>
-                                        <MenuItem value={" SECOND FLOOR"}>
-                                            SECOND FLOOR
+                                        <MenuItem value={"LONDON"}>
+                                            LONDON
+                                        </MenuItem>
+                                        <MenuItem value={"AMSTERDAM"}>
+                                            AMSTERDAM
+                                        </MenuItem>
+                                        <MenuItem value={"BEIGING"}>
+                                            BEIGING
+                                        </MenuItem>
+                                        <MenuItem value={"DUBAI"}>
+                                            DUBAI
+                                        </MenuItem>
+                                        <MenuItem value={"SYDNEY"}>
+                                            SYDNEY
                                         </MenuItem>
                                     </Select>
                                 </FormControl>
@@ -185,7 +201,7 @@ export default function BookingForm() {
 
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    label="Basic example"
+                                    label="Date"
                                     value={value}
                                     onChange={(newValue) => {
                                         setValue(newValue);
@@ -203,7 +219,7 @@ export default function BookingForm() {
                                 />
                             </LocalizationProvider>
                             <Stack
-                                direction={"row"}
+                                direction={smUp ? "row" : "column"}
                                 spacing={2}
                                 sx={{ width: "100% " }}
                             >

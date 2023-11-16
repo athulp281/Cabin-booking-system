@@ -23,47 +23,103 @@ export const Cards = ({ data }) => {
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 {isLoading ? (
                     <>
-                        <Skeleton
-                            variant="rounded"
-                            sx={{ borderRadius: 4 }}
-                            width={345}
-                            height={300}
-                        />
+                        <Box>
+                            <Stack direction={"column"} spacing={2}>
+                                <Skeleton
+                                    variant="rounded"
+                                    sx={{ borderRadius: 4 }}
+                                    width={345}
+                                    height={150}
+                                />
+                                <Skeleton />
+                                <Skeleton width="60%" />
+                            </Stack>
+                        </Box>
                     </>
                 ) : (
-                    <Card sx={{ maxWidth: 345, borderRadius: 4 }}>
+                    <Card
+                        sx={{
+                            maxWidth: 345,
+                            borderRadius: 4,
+                            minWidth: 345,
+                            minHeight: 400,
+                        }}
+                    >
                         <CardMedia
-                            sx={{ height: 140 }}
+                            sx={{
+                                height: 140,
+                                position: "relative",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
                             image="https://img.freepik.com/free-photo/conference-room-with-desk-wall-windows-that-says-office_1340-37385.jpg?t=st=1700066607~exp=1700070207~hmac=a85f9b15fd3abb4db4e9fec3ef1227a60478c6edb42d3a9b834f684c13b51223&w=1060"
-                            title="green iguana"
-                        />
+                        >
+                            <Stack direction={"column"} spacing={2}>
+                                <Typography
+                                    variant="h6"
+                                    component="div"
+                                    sx={{
+                                        color: "white",
+                                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                        padding: "8px",
+                                        textAlign: "center",
+                                        borderRadius: 2,
+                                    }}
+                                >
+                                    {data.cabin}
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        color: "white",
+                                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                        padding: "1px",
+                                        textAlign: "center",
+                                        borderRadius: 2,
+                                    }}
+                                >
+                                    {data.status}
+                                </Box>
+                            </Stack>
+                        </CardMedia>
+
                         <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                            >
+                            <Typography variant="h5" component="div">
                                 {data.bookingPerson}
                             </Typography>
-                            <Typography
-                                gutterBottom
-                                variant="h6"
-                                component="div"
-                            >
+                            <Typography gutterBottom variant="h6" fontSize={14}>
                                 {data.department}
                             </Typography>
                             <Chip
                                 sx={{ fontWeight: "bolder" }}
                                 size="small"
-                                variant="outlined"
+                                variant="filled"
                                 color="primary"
                                 label={`Date :-${data.date} `}
                             />
+                            <Stack direction={"row"} spacing={2} paddingTop={1}>
+                                <Chip
+                                    sx={{ fontWeight: "bolder" }}
+                                    size="small"
+                                    variant="outlined"
+                                    color="primary"
+                                    label={`From :-${data.startTime} `}
+                                />
+                                <Chip
+                                    sx={{ fontWeight: "bolder" }}
+                                    size="small"
+                                    variant="outlined"
+                                    color="primary"
+                                    label={`To :-${data.endTime} `}
+                                />
+                            </Stack>
 
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate
-                                reptiles, with over 6,000 species, ranging
-                                across all continents except Antarctica
+                            <Typography
+                                sx={{ pt: 2 }}
+                                variant="body2"
+                                color="text.secondary"
+                            >
+                                {data.discription}
                             </Typography>
                         </CardContent>
                         <CardActions>
