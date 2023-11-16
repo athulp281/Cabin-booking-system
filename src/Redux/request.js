@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://bookingapp-ctv6.onrender.com/";
+axios.defaults.baseURL = "https://bookingapp-5zvh.onrender.com/";
 
 const request = (options) => {
     let headers = {

@@ -3,8 +3,14 @@ import React from "react";
 import LoginPage from "./LogInpage";
 import cabin from "../../assets/images/cabin.jpg";
 import useResponsive from "../../hooks/UseResponsive";
+import { motion } from "framer-motion";
 
 export const Login = ({ authDataCheck, setAuthData }) => {
+    const variants = {
+        hidden: { y: "-100%" },
+        visible: { y: 0 },
+    };
+    const transition = { ease: "easeInOut", duration: 0.6 };
     const smUp = useResponsive("up", "sm");
 
     const mdUp = useResponsive("up", "md");
@@ -51,22 +57,41 @@ export const Login = ({ authDataCheck, setAuthData }) => {
                         )}
 
                         {smUp ? null : (
-                            <LoginPage
-                                authDataCheck={authDataCheck}
-                                setAuthData={setAuthData}
-                            />
+                            <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={variants}
+                                transition={transition}
+                                // transition={{ ease: "easeOut", duration: 0.5 }}
+                            >
+                                <LoginPage
+                                    authDataCheck={authDataCheck}
+                                    setAuthData={setAuthData}
+                                />
+                            </motion.div>
                         )}
                     </Paper>
                     {!smUp ? null : (
-                        <Box
-                            paddingTop={10}
-                            sx={{ display: "flex", justifyContent: "center" }}
+                        <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            variants={variants}
+                            transition={transition}
+                            // transition={{ ease: "easeOut", duration: 0.5 }}
                         >
-                            <LoginPage
-                                authDataCheck={authDataCheck}
-                                setAuthData={setAuthData}
-                            />
-                        </Box>
+                            <Box
+                                paddingTop={10}
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <LoginPage
+                                    authDataCheck={authDataCheck}
+                                    setAuthData={setAuthData}
+                                />
+                            </Box>
+                        </motion.div>
                     )}
                 </Stack>
             </Box>
